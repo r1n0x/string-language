@@ -1,6 +1,6 @@
 services:
   php-fpm:
-    container_name: breadcrumbs-bundle-tests-runner
+    container_name: string-language-tests-runner
     build:
       context: .
     volumes:
