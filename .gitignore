@@ -1,0 +1,4 @@
+.php-cs-fixer.cache
+.phpunit.cache
+vendor
+coverege_report

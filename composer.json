@@ -1,0 +1,31 @@
+{
+    "name": "r1n0x/simple-expressions-language",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "R1n0x\\StringLanguage\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "R1n0x\\StringLanguage\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "r1n0x",
+            "email": "r1n0x-dev@proton.me"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "jms/serializer": "^3.31",
+        "doctrine/lexer": "^3.0"
+    },
+    "scripts": {
+        "phpunit": "composer install --working-dir=tools && tools/vendor/bin/phpunit --testdox --coverage-html coverege_report",
+        "phpstan": "composer install --working-dir=tools && tools/vendor/bin/phpstan analyse",
+        "csfixer": "composer install --working-dir=tools && tools/vendor/bin/php-cs-fixer fix src"
+    }
+}
