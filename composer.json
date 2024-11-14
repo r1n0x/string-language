@@ -1,5 +1,6 @@
 {
-    "name": "r1n0x/simple-expressions-language",
+    "name": "r1n0x/string-language",
+    "version": "0.1.0",
     "type": "library",
     "license": "MIT",
     "autoload": {
