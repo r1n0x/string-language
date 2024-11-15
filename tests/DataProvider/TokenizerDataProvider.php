@@ -262,6 +262,66 @@ class TokenizerDataProvider
                     new StringToken(')'),
                 ]
             ],
+            'String containing expression having one reference, which is empty' => [
+                'function( ,)',
+                [
+                    new ExpressionToken(
+                        name: 'function',
+                        tokens: []
+                    ),
+                ]
+            ],
+            'String containing expression having one empty reference between variables' => [
+                'function(var1, ,var2)',
+                [
+                    new ExpressionToken(
+                        name: 'function',
+                        tokens: [
+                            new StringToken('var1'),
+                            new StringToken('var2')
+                        ]
+                    ),
+                ]
+            ],
+            'String containing expression having multiple references, which are empty' => [
+                'function( , , , ,)',
+                [
+                    new ExpressionToken(
+                        name: 'function',
+                        tokens: []
+                    ),
+                ]
+            ],
+            'String containing nested expression having one reference, which is empty' => [
+                'function1(function2( ,))',
+                [
+                    new ExpressionToken(
+                        name: 'function1',
+                        tokens: [
+                            new ExpressionToken(
+                                name: 'function2',
+                                tokens: []
+                            ),
+                        ]
+                    )
+                ]
+            ],
+            'String containing nested expression having multiple references of which one is empty' => [
+                'function1(function2(var1, ,))',
+                [
+                    new ExpressionToken(
+                        name: 'function1',
+                        tokens: [
+                            new ExpressionToken(
+                                name: 'function2',
+                                tokens: [
+                                    new StringToken('var1')
+                                ]
+                            ),
+                        ]
+                    )
+                ]
+            ],
             "String with everything" => [
                 'test function1(var1, var2) test2   function2(var3) () (test) (function3(var4)) "test3" \'test4\' \'function4()\' "function5(function6(function7()))" test5 function8(function9(var5)) test6',
                 [

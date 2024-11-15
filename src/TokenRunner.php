@@ -18,7 +18,7 @@ use Stringable;
 class TokenRunner
 {
     public function __construct(
-        private readonly ExpressionRunner $methodExecutor,
+        private readonly ExpressionRunner $expressionRunner,
     ) {
     }
 
@@ -40,7 +40,7 @@ class TokenRunner
             } elseif ($token instanceof SeparatorToken) {
                 $ret .= $token->getSeparator();
             } elseif ($token instanceof ExpressionToken) {
-                $value = $this->methodExecutor->run($token, $variables);
+                $value = $this->expressionRunner->run($token, $variables);
                 if (!is_string($value) && !($value instanceof Stringable)) {
                     throw new TokenRunnerException(sprintf("Non-nested expression must return value which is stringable (implements interface '%s')", Stringable::class));
                 }

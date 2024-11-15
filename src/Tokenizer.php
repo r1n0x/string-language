@@ -69,6 +69,17 @@ class Tokenizer
         return $ret;
     }
 
+    /**
+     * @return Token[]
+     *
+     * @throws ExpressionNestLimitReachedException
+     * @throws InvalidExpressionArgumentException
+     */
+    public function getTokens(Tokenizer $tokenizer, string $arguments): array
+    {
+        return $tokenizer->tokenize($arguments);
+    }
+
     protected function getExpressionName(): string
     {
         return explode('(', (string) $this->lexer->token?->value)[0];
@@ -81,7 +92,9 @@ class Tokenizer
     {
         $matches = [];
         $expressionName = $this->getExpressionName();
-        preg_match('/^[a-zA-Z0-9]*$/', $argument, $matches);
+        // allows spaces so you can pass arguments with spaces to literals,
+        // downside is allowing variables with spaces obviously, but I guess that's a feature
+        preg_match('/^[a-zA-Z0-9_ ]*$/', $argument, $matches);
         if ('' === $argument || !isset($matches[0]) || $matches[0] !== $argument) {
             throw new InvalidExpressionArgumentException("Expression '$expressionName' argument '$argument' is invalid.");
         }
@@ -95,22 +108,55 @@ class Tokenizer
      */
     protected function getExpressionTokens(): array
     {
-        $tokens = [];
+        $ret = [];
         $value = (string) $this->lexer->token?->value;
         $openingPosition = strpos($value, '(') + 1;
         $closingPosition = strrpos($value, ')');
         $arguments = substr($value, $openingPosition, $closingPosition - $openingPosition);
         $tokenizer = clone $this;
-        foreach ($tokenizer->tokenize($arguments) as $token) {
-            if ($token instanceof StringToken) {
+        $tokens = $this->mergeArgumentsWhichAreAnSeparatedStrings($this->getTokens($tokenizer, $arguments));
+        foreach ($tokens as $token) {
+            // trim($token->getRaw()) !== ',' has a "side-effect" which makes function1(function2(var1, ,)) work
+            // it merges all contents of function2 (var1, ,) into var1, so it looks like functions takes only one variable
+            if ($token instanceof StringToken && ',' !== trim($token->getRaw())) {
                 $argument = trim($token->getRaw(), ',');
                 $this->throwIfInvalidExpressionArgument($argument);
-                $tokens[] = new StringToken($argument);
+                $ret[] = new StringToken($argument);
             } elseif ($token instanceof ExpressionToken) {
-                $tokens[] = $token;
+                $ret[] = $token;
             }
         }
 
-        return $tokens;
+        return $ret;
+    }
+
+    /**
+     * @param array<int, Token> $tokens
+     *
+     * @return array<int, Token>
+     */
+    private function mergeArgumentsWhichAreAnSeparatedStrings(array $tokens): array
+    {
+        $ret = [];
+        $lastToken = null;
+        foreach ($tokens as $token) {
+            if ($token instanceof SeparatorToken || $token instanceof StringToken) {
+                if ($lastToken instanceof StringToken && count(explode(',', $lastToken->getRaw())) <= 1) {
+                    unset($ret[array_key_last($ret)]);
+                    $mergedToken = new StringToken(
+                        raw: $lastToken->getRaw() . ($token instanceof SeparatorToken
+                            ? $token->getSeparator()
+                            : $token->getRaw())
+                    );
+                    $ret[] = $mergedToken;
+                    $lastToken = $mergedToken;
+                    continue;
+                }
+            }
+            $ret[] = $token;
+            $lastToken = $token;
+        }
+
+        return array_values($ret);
     }
 }
