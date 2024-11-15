@@ -10,8 +10,7 @@ abstract class Expression
 
     /**
      * Whenever the strings passed to expression should
-     * be used literally (as arguments) or be mapped to variables
-     * @return bool
+     * be used literally (as arguments) or be mapped to variables.
      */
     public function useStringArgumentsAsParameters(): bool
     {

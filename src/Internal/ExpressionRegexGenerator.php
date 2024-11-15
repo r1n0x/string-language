@@ -13,11 +13,11 @@ class ExpressionRegexGenerator
     public const SAFE_EXPRESSION_NEST_AMOUNT = self::PREG_SPLIT_MAX_REGEX_NEST - 1;
     private const PREG_SPLIT_MAX_REGEX_NEST = 249;
 
-    public function generate(int $max): string
+    public function generate(int $nestLevel): string
     {
         $ret = '';
 
-        for ($i = 0; $i < $max; ++$i) {
+        for ($i = 0; $i < $nestLevel; ++$i) {
             $ret = '(?:[^()]|\(' . $ret . '*\))';
         }
 

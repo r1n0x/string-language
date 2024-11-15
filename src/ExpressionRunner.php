@@ -3,10 +3,9 @@
 namespace R1n0x\StringLanguage;
 
 use R1n0x\StringLanguage\Exception\RequiredVariableNotProvidedException;
+use R1n0x\StringLanguage\Exception\UnexpectedToken;
 use R1n0x\StringLanguage\Exception\UnknownExpressionException;
-use R1n0x\StringLanguage\Exception\UnknownTokenException;
 use R1n0x\StringLanguage\Token\ExpressionToken;
-use R1n0x\StringLanguage\Token\SeparatorToken;
 use R1n0x\StringLanguage\Token\StringToken;
 
 /**
@@ -16,8 +15,7 @@ class ExpressionRunner
 {
     public function __construct(
         private readonly ExpressionRegistry $registry,
-    )
-    {
+    ) {
     }
 
     /**
@@ -27,7 +25,7 @@ class ExpressionRunner
      *
      * @throws UnknownExpressionException
      * @throws RequiredVariableNotProvidedException
-     * @throws UnknownTokenException
+     * @throws UnexpectedToken
      */
     public function run(ExpressionToken $expression, array $variables): mixed
     {
@@ -43,7 +41,7 @@ class ExpressionRunner
      *
      * @throws RequiredVariableNotProvidedException
      * @throws UnknownExpressionException
-     * @throws UnknownTokenException
+     * @throws UnexpectedToken
      *
      * @phpstan-ignore missingType.iterableValue
      */
@@ -53,20 +51,25 @@ class ExpressionRunner
         foreach ($expression->getTokens() as $token) {
             $values[] = match (true) {
                 $token instanceof ExpressionToken => $this->run($token, $variables),
-                $token instanceof SeparatorToken => $token->getSeparator(),
                 $token instanceof StringToken => $this->getVariable($expression, $token, $variables),
-                default => throw new UnknownTokenException(),
+                default => throw new UnexpectedToken(),
             };
         }
 
         return $values;
     }
 
-    private function getVariable(ExpressionToken $expression, StringToken $token, array $variables)
+    /**
+     * @param array<string, mixed> $variables
+     *
+     * @throws UnknownExpressionException
+     */
+    private function getVariable(ExpressionToken $expression, StringToken $token, array $variables): mixed
     {
-        if($this->registry->get($expression->getName())->useStringArgumentsAsParameters()) {
+        if ($this->registry->get($expression->getName())->useStringArgumentsAsParameters()) {
             return $token->getRaw();
         }
+
         return $variables[$token->getRaw()];
     }
 }

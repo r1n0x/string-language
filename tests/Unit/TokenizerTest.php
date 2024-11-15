@@ -7,9 +7,9 @@ use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
-use R1n0x\StringLanguage\Enum\LexerType;
 use R1n0x\StringLanguage\Exception\ExpressionNestLimitReachedException;
 use R1n0x\StringLanguage\Exception\InvalidExpressionArgumentException;
+use R1n0x\StringLanguage\Internal\Enum\LexerToken;
 use R1n0x\StringLanguage\Internal\ExpressionRegexGenerator;
 use R1n0x\StringLanguage\Internal\StringLexer;
 use R1n0x\StringLanguage\Tests\DataProvider\TokenizerDataProvider;
@@ -28,7 +28,7 @@ use R1n0x\StringLanguage\Tokenizer;
 #[UsesClass(StringToken::class)]
 #[UsesClass(SeparatorToken::class)]
 #[UsesClass(ExpressionToken::class)]
-#[UsesClass(LexerType::class)]
+#[UsesClass(LexerToken::class)]
 class TokenizerTest extends TestCase
 {
     /**

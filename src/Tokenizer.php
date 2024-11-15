@@ -2,9 +2,9 @@
 
 namespace R1n0x\StringLanguage;
 
-use R1n0x\StringLanguage\Enum\LexerType;
 use R1n0x\StringLanguage\Exception\ExpressionNestLimitReachedException;
 use R1n0x\StringLanguage\Exception\InvalidExpressionArgumentException;
+use R1n0x\StringLanguage\Internal\Enum\LexerToken;
 use R1n0x\StringLanguage\Internal\StringLexer;
 use R1n0x\StringLanguage\Token\ExpressionToken;
 use R1n0x\StringLanguage\Token\SeparatorToken;
@@ -48,7 +48,7 @@ class Tokenizer
 
             $this->lexer->moveNext();
 
-            if ($this->lexer->token?->isA(LexerType::STRING)) {
+            if ($this->lexer->token?->isA(LexerToken::STRING)) {
                 $latestArrayKey = array_key_last($ret);
                 $lastToken = null !== $latestArrayKey ? $ret[$latestArrayKey] : false;
                 if ($lastToken instanceof StringToken) {
@@ -56,9 +56,9 @@ class Tokenizer
                 } else {
                     $ret[] = new StringToken((string) $this->lexer->token->value);
                 }
-            } elseif ($this->lexer->token?->isA(LexerType::SEPARATOR)) {
+            } elseif ($this->lexer->token?->isA(LexerToken::SEPARATOR)) {
                 $ret[] = new SeparatorToken();
-            } elseif ($this->lexer->token?->isA(LexerType::EXPRESSION)) {
+            } elseif ($this->lexer->token?->isA(LexerToken::EXPRESSION)) {
                 $ret[] = new ExpressionToken(
                     name: $this->getExpressionName(),
                     tokens: $this->getExpressionTokens(),

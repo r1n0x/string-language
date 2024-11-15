@@ -3,15 +3,15 @@
 namespace R1n0x\StringLanguage\Internal;
 
 use Doctrine\Common\Lexer\AbstractLexer;
-use R1n0x\StringLanguage\Enum\LexerType;
 use R1n0x\StringLanguage\Exception\ExpressionNestLimitReachedException;
+use R1n0x\StringLanguage\Internal\Enum\LexerToken;
 
 /**
  * @internal
  *
  * @author r1n0x <r1n0x-dev@proton.me>
  *
- * @extends AbstractLexer<LexerType, string>
+ * @extends AbstractLexer<LexerToken, string>
  */
 class StringLexer extends AbstractLexer
 {
@@ -44,16 +44,16 @@ class StringLexer extends AbstractLexer
         return [];
     }
 
-    protected function getType(string &$value): LexerType
+    protected function getType(string &$value): LexerToken
     {
         if (preg_match('/\w\(/', $value)) {
-            return LexerType::EXPRESSION;
+            return LexerToken::EXPRESSION;
         }
         if ('' === trim($value)) {
-            return LexerType::SEPARATOR;
+            return LexerToken::SEPARATOR;
         }
 
-        return LexerType::STRING;
+        return LexerToken::STRING;
     }
 
     /**
