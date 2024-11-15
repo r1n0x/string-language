@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use R1n0x\StringLanguage\Exception\ExpressionAlreadyRegisteredException;
 use R1n0x\StringLanguage\Exception\UnknownExpressionException;
 use R1n0x\StringLanguage\Expression\Expression;
-use R1n0x\StringLanguage\Expression\VariableExpression;
+use R1n0x\StringLanguage\Expression\LiteralExpression;
 use R1n0x\StringLanguage\ExpressionRegistry;
 use R1n0x\StringLanguage\Internal\ExpressionValidator;
 
@@ -19,7 +19,7 @@ use R1n0x\StringLanguage\Internal\ExpressionValidator;
  */
 #[CoversClass(ExpressionRegistry::class)]
 #[UsesClass(ExpressionValidator::class)]
-#[UsesClass(VariableExpression::class)]
+#[UsesClass(LiteralExpression::class)]
 class ExpressionRegistryTest extends TestCase
 {
     #[Test]
@@ -27,8 +27,8 @@ class ExpressionRegistryTest extends TestCase
     public function adds_expression_to_registry(): void
     {
         $registry = $this->getRegistry();
-        $registry->register(new VariableExpression());
-        $this->assertInstanceOf(Expression::class, $registry->get('var'));
+        $registry->register(new LiteralExpression());
+        $this->assertInstanceOf(Expression::class, $registry->get('literal'));
     }
 
     #[Test]
@@ -36,8 +36,8 @@ class ExpressionRegistryTest extends TestCase
     public function returns_method_from_registry(): void
     {
         $registry = $this->getRegistry();
-        $registry->register(new VariableExpression());
-        $this->assertInstanceOf(Expression::class, $registry->get('var'));
+        $registry->register(new LiteralExpression());
+        $this->assertInstanceOf(Expression::class, $registry->get('literal'));
     }
 
     #[Test]
@@ -46,8 +46,8 @@ class ExpressionRegistryTest extends TestCase
     {
         $this->expectException(ExpressionAlreadyRegisteredException::class);
         $registry = $this->getRegistry();
-        $registry->register(new VariableExpression());
-        $registry->register(new VariableExpression());
+        $registry->register(new LiteralExpression());
+        $registry->register(new LiteralExpression());
     }
 
     #[Test]

@@ -6,6 +6,8 @@ use JMS\Serializer\Annotation\Discriminator;
 
 /**
  * @author r1n0x <r1n0x-dev@proton.me>
+ *
+ * @codeCoverageIgnore
  */
 #[Discriminator(map: [
     'expression' => ExpressionToken::class,

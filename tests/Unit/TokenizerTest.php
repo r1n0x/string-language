@@ -25,6 +25,7 @@ use R1n0x\StringLanguage\Tokenizer;
  */
 #[CoversClass(Tokenizer::class)]
 #[CoversClass(StringLexer::class)]
+#[CoversClass(StringToken::class)]
 #[UsesClass(ExpressionRegexGenerator::class)]
 #[UsesClass(StringToken::class)]
 #[UsesClass(SeparatorToken::class)]

@@ -26,6 +26,8 @@ use stdClass;
  * @author r1n0x <r1n0x-dev@proton.me>
  */
 #[CoversClass(TokenRunner::class)]
+#[CoversClass(ExpressionToken::class)]
+#[CoversClass(SeparatorToken::class)]
 #[UsesClass(ExpressionRunner::class)]
 #[UsesClass(ExpressionValidator::class)]
 #[UsesClass(ExpressionRegistry::class)]

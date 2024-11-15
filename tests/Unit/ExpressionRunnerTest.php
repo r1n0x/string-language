@@ -24,6 +24,7 @@ use R1n0x\StringLanguage\Token\StringToken;
  * @author r1n0x <r1n0x-dev@proton.me>
  */
 #[CoversClass(ExpressionRunner::class)]
+#[CoversClass(Expression::class)]
 #[UsesClass(ExpressionRegistry::class)]
 #[UsesClass(ExpressionValidator::class)]
 #[UsesClass(ExpressionToken::class)]
