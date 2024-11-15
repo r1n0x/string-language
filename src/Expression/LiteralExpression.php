@@ -24,7 +24,7 @@ class LiteralExpression extends Expression
         return $value;
     }
 
-    public function useStringArgumentsAsParameters(): bool
+    public function useStringParametersAsArguments(): bool
     {
         return true;
     }

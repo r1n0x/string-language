@@ -66,7 +66,7 @@ class ExpressionRunner
      */
     private function getVariable(ExpressionToken $expression, StringToken $token, array $variables): mixed
     {
-        if ($this->registry->get($expression->getName())->useStringArgumentsAsParameters()) {
+        if ($this->registry->get($expression->getName())->useStringParametersAsArguments()) {
             return $token->getRaw();
         }
 
