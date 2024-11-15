@@ -1,6 +1,6 @@
 <?php
 
-namespace R1n0x\StringLanguage\Tests\Unit\Internal;
+namespace R1n0x\StringLanguage\Tests\Unit\Internal\Validator;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
@@ -41,8 +41,8 @@ class ExpressionValidatorTest extends TestCase
     }
 
     #[Test]
-    #[TestDox('Throws exception, if expression has a undefined method')]
-    public function throws_exception_if_expression_has_a_undefined_method(): void
+    #[TestDox('Throws an exception, if expression has a undefined method')]
+    public function throws_an_exception_if_expression_has_a_undefined_method(): void
     {
         $this->expectException(UndefinedMethodException::class);
         $validator = $this->getValidator();
@@ -60,8 +60,8 @@ class ExpressionValidatorTest extends TestCase
     }
 
     #[Test]
-    #[TestDox('Throws exception, if expression defined a method, but it\'s not public')]
-    public function throws_exception_if_expression_method_is_not_public(): void
+    #[TestDox('Throws an exception, if expression defined a method, but it\'s not public')]
+    public function throws_an_exception_if_expression_method_is_not_public(): void
     {
         $this->expectException(NonpublicMethodException::class);
         $validator = $this->getValidator();

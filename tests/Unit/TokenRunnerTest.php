@@ -45,8 +45,8 @@ class TokenRunnerTest extends TestCase
     }
 
     #[Test]
-    #[TestDox('Throws exception, if non-nested expression doesn\'t return a string')]
-    public function throws_exception_if_non_nested_expression_doesnt_return_a_string(): void
+    #[TestDox('Throws an exception, if non-nested expression doesn\'t return a string')]
+    public function throws_an_exception_if_non_nested_expression_doesnt_return_a_string(): void
     {
         $this->expectException(TokenRunnerException::class);
         $runner = $this->getTokenRunner($this->prepareExpressionRunner(function (ExpressionRegistry $registry) {
@@ -75,8 +75,8 @@ class TokenRunnerTest extends TestCase
     }
 
     #[Test]
-    #[TestDox('Throws exception, if one of provided tokens is invalid')]
-    public function throws_exception_if_one_of_provided_tokens_is_invalid(): void
+    #[TestDox('Throws an exception, if one of provided tokens is invalid')]
+    public function throws_an_exception_if_one_of_provided_tokens_is_invalid(): void
     {
         $this->expectException(UnexpectedToken::class);
         $runner = $this->getTokenRunner();
@@ -85,8 +85,8 @@ class TokenRunnerTest extends TestCase
     }
 
     #[Test]
-    #[TestDox('Throws exception, if non-nested expression returns unstringable value')]
-    public function throws_exception_if_non_nested_expressions_returns_unstringable_value(): void
+    #[TestDox('Throws an exception, if non-nested expression returns unstringable value')]
+    public function throws_an_exception_if_non_nested_expressions_returns_unstringable_value(): void
     {
         $this->expectException(UnexpectedToken::class);
         $runner = $this->getTokenRunner();
@@ -94,12 +94,12 @@ class TokenRunnerTest extends TestCase
         }], []);
     }
 
-    private function getTokenRunner(?ExpressionRunner $runner = null): TokenRunner
+    protected function getTokenRunner(?ExpressionRunner $runner = null): TokenRunner
     {
         return new TokenRunner($runner ?? new ExpressionRunner(new ExpressionRegistry()));
     }
 
-    private function prepareExpressionRunner(callable $registryModifier): ExpressionRunner
+    protected function prepareExpressionRunner(callable $registryModifier): ExpressionRunner
     {
         $registry = new ExpressionRegistry();
         $registryModifier($registry);

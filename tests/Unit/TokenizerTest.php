@@ -5,6 +5,7 @@ namespace R1n0x\StringLanguage\Tests\Unit;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use R1n0x\StringLanguage\Exception\ExpressionNestLimitReachedException;
@@ -45,7 +46,8 @@ class TokenizerTest extends TestCase
     }
 
     #[Test]
-    public function throws_exception_when_expressions_are_too_nested(): void
+    #[TestDox('Throws an exception when expressions are too nested')]
+    public function throws_an_exception_when_expressions_are_too_nested(): void
     {
         $this->expectException(ExpressionNestLimitReachedException::class);
         $tokenizer = $this->getTokenizer();
@@ -57,15 +59,15 @@ class TokenizerTest extends TestCase
     }
 
     #[Test]
-    #[DataProviderExternal(TokenizerDataProvider::class, 'throws_exception_when_empty_reference_passed_to_expression')]
-    public function throws_exception_when_empty_reference_passed_to_expression(string $string): void
+    #[DataProviderExternal(TokenizerDataProvider::class, 'throws_an_exception_when_empty_reference_passed_to_expression')]
+    public function throws_an_exception_when_empty_reference_passed_to_expression(string $string): void
     {
         $this->expectException(InvalidExpressionArgumentException::class);
         $tokenizer = $this->getTokenizer();
         $tokenizer->tokenize($string);
     }
 
-    public function getTokenizer(): Tokenizer
+    protected function getTokenizer(): Tokenizer
     {
         return new Tokenizer();
     }

@@ -7,7 +7,7 @@ namespace R1n0x\StringLanguage\Expression;
  */
 class LiteralExpression extends Expression
 {
-    private const EXPRESSION_NAME = 'literal';
+    protected const EXPRESSION_NAME = 'literal';
 
     public function getExpressionName(): string
     {

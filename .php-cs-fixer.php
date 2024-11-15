@@ -15,7 +15,10 @@ return (new PhpCsFixer\Config())
         'no_extra_blank_lines' => true,
         'phpdoc_align' => [
             'align' => 'left'
-        ]
+        ],
+        'no_unused_imports' => true,
+        'global_namespace_import' => true,
+        'ordered_types' => true
     ])
     ->setFinder($finder)
     ->setIndent("    ")

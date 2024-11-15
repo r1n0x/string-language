@@ -69,7 +69,7 @@ class Tokenizer
         return $ret;
     }
 
-    public function getExpressionName(): string
+    protected function getExpressionName(): string
     {
         return explode('(', (string) $this->lexer->token?->value)[0];
     }
@@ -77,7 +77,7 @@ class Tokenizer
     /**
      * @throws InvalidExpressionArgumentException
      */
-    public function throwIfInvalidExpressionArgument(string $argument): void
+    protected function throwIfInvalidExpressionArgument(string $argument): void
     {
         $matches = [];
         $expressionName = $this->getExpressionName();
@@ -93,7 +93,7 @@ class Tokenizer
      * @throws ExpressionNestLimitReachedException
      * @throws InvalidExpressionArgumentException
      */
-    private function getExpressionTokens(): array
+    protected function getExpressionTokens(): array
     {
         $tokens = [];
         $value = (string) $this->lexer->token?->value;

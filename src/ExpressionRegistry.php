@@ -52,7 +52,7 @@ class ExpressionRegistry
         return $this->expressions[$name];
     }
 
-    private function has(string $name): bool
+    protected function has(string $name): bool
     {
         return isset($this->expressions[$name]);
     }

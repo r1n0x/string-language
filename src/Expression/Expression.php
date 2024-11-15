@@ -4,8 +4,14 @@ namespace R1n0x\StringLanguage\Expression;
 
 abstract class Expression
 {
+    /**
+     * Expression name which would be used within a tokenized string.
+     */
     abstract public function getExpressionName(): string;
 
+    /**
+     * Method name of this class that would be called on expression execution.
+     */
     abstract public function getMethodName(): string;
 
     /**

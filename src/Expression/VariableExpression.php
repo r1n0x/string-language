@@ -7,7 +7,7 @@ namespace R1n0x\StringLanguage\Expression;
  */
 class VariableExpression extends Expression
 {
-    private const EXPRESSION_NAME = 'var';
+    protected const EXPRESSION_NAME = 'var';
 
     public function getExpressionName(): string
     {

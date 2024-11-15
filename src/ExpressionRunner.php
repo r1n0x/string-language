@@ -9,6 +9,8 @@ use R1n0x\StringLanguage\Token\ExpressionToken;
 use R1n0x\StringLanguage\Token\StringToken;
 
 /**
+ * @internal
+ *
  * @author r1n0x <r1n0x-dev@proton.me>
  */
 class ExpressionRunner
@@ -27,11 +29,11 @@ class ExpressionRunner
      * @throws RequiredVariableNotProvidedException
      * @throws UnexpectedToken
      */
-    public function run(ExpressionToken $expression, array $variables): mixed
+    public function run(ExpressionToken $token, array $variables): mixed
     {
-        $method = $this->registry->get($expression->getName());
+        $expression = $this->registry->get($token->getName());
 
-        return $method->{$method->getMethodName()}(...$this->getArguments($expression, $variables));
+        return $expression->{$expression->getMethodName()}(...$this->getArguments($token, $variables));
     }
 
     /**
@@ -45,18 +47,18 @@ class ExpressionRunner
      *
      * @phpstan-ignore missingType.iterableValue
      */
-    private function getArguments(ExpressionToken $expression, array $variables): array
+    protected function getArguments(ExpressionToken $expression, array $variables): array
     {
-        $values = [];
+        $arguments = [];
         foreach ($expression->getTokens() as $token) {
-            $values[] = match (true) {
+            $arguments[] = match (true) {
                 $token instanceof ExpressionToken => $this->run($token, $variables),
                 $token instanceof StringToken => $this->getVariable($expression, $token, $variables),
                 default => throw new UnexpectedToken(),
             };
         }
 
-        return $values;
+        return $arguments;
     }
 
     /**
@@ -64,7 +66,7 @@ class ExpressionRunner
      *
      * @throws UnknownExpressionException
      */
-    private function getVariable(ExpressionToken $expression, StringToken $token, array $variables): mixed
+    protected function getVariable(ExpressionToken $expression, StringToken $token, array $variables): mixed
     {
         if ($this->registry->get($expression->getName())->useStringParametersAsArguments()) {
             return $token->getRaw();

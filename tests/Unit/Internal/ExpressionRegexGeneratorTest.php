@@ -20,7 +20,12 @@ class ExpressionRegexGeneratorTest extends TestCase
     #[DataProviderExternal(ExpressionRegexGeneratorDataProvider::class, 'generates_regex')]
     public function generates_regex(int $nestLevel, string $expected)
     {
-        $generator = new ExpressionRegexGenerator();
+        $generator = $this->getGenerator();
         $this->assertEquals($expected, $generator->generate($nestLevel));
+    }
+
+    protected function getGenerator(): ExpressionRegexGenerator
+    {
+        return new ExpressionRegexGenerator();
     }
 }

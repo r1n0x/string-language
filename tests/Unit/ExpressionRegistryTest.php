@@ -7,11 +7,11 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
-use R1n0x\StringLanguage\ExpressionRegistry;
 use R1n0x\StringLanguage\Exception\ExpressionAlreadyRegisteredException;
 use R1n0x\StringLanguage\Exception\UnknownExpressionException;
 use R1n0x\StringLanguage\Expression\Expression;
 use R1n0x\StringLanguage\Expression\VariableExpression;
+use R1n0x\StringLanguage\ExpressionRegistry;
 use R1n0x\StringLanguage\Internal\ExpressionValidator;
 
 /**
@@ -32,7 +32,7 @@ class ExpressionRegistryTest extends TestCase
     }
 
     #[Test]
-    #[TestDox('Returns method from registry')]
+    #[TestDox('Returns expression from registry')]
     public function returns_method_from_registry(): void
     {
         $registry = $this->getRegistry();
@@ -41,8 +41,8 @@ class ExpressionRegistryTest extends TestCase
     }
 
     #[Test]
-    #[TestDox('Throws exception when registering expression with same name twice')]
-    public function throws_exception_when_registering_expression_with_same_name_twice(): void
+    #[TestDox('Throws an exception when registering expression with same name twice')]
+    public function throws_an_exception_when_registering_expression_with_same_name_twice(): void
     {
         $this->expectException(ExpressionAlreadyRegisteredException::class);
         $registry = $this->getRegistry();
@@ -51,15 +51,15 @@ class ExpressionRegistryTest extends TestCase
     }
 
     #[Test]
-    #[TestDox('Throws exception when trying to get an unregistered expression')]
-    public function throws_exception_when_trying_to_get_an_unregistered_expression(): void
+    #[TestDox('Throws an exception when trying to get an unregistered expression')]
+    public function throws_an_exception_when_trying_to_get_an_unregistered_expression(): void
     {
         $this->expectException(UnknownExpressionException::class);
         $registry = $this->getRegistry();
         $registry->get('some_unregistered_method');
     }
 
-    private function getRegistry(): ExpressionRegistry
+    protected function getRegistry(): ExpressionRegistry
     {
         return new ExpressionRegistry();
     }

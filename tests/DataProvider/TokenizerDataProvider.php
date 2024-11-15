@@ -343,7 +343,7 @@ class TokenizerDataProvider
         ];
     }
 
-    public static function throws_exception_when_empty_reference_passed_to_expression(): array
+    public static function throws_an_exception_when_empty_reference_passed_to_expression(): array
     {
         return [
             'String containing expression having one reference, which is empty' => [

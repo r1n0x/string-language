@@ -59,7 +59,7 @@ class StringLexer extends AbstractLexer
     /**
      * @throws ExpressionNestLimitReachedException
      */
-    private function throwIfInputIsUnsafe(string $input): void
+    protected function throwIfInputIsUnsafe(string $input): void
     {
         $unsafeMatches = [];
         preg_match('/' . $this->methodRegexGenerator->generate(ExpressionRegexGenerator::UNSAFE_EXPRESSION_NEST_AMOUNT) . '/', $input, $unsafeMatches);
