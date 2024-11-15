@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/github/r1n0x/string-language/graph/badge.svg?token=VAFFHQTTUW)](https://codecov.io/github/r1n0x/string-language)
+
 Status
 --------------------------
 Project is currently being worked on, everything is looking good tho.
@@ -15,6 +17,6 @@ Running tests
 --------------------------
 Library provides a docker container for reproducible test environment.
 ```bash
-cd resources/tests-runner && docker compose up && docker compose rm --force
+docker run --rm --volume .:/source --workdir /source --tty r1n0x/string-language-tests-runner:1.0.0 composer run-script phpunit
 ```
 Running tests creates an `coverege_report` folder which contains [HTML coverage report](https://docs.phpunit.de/en/11.4/code-coverage.html) - to view it simply open it in your browser.

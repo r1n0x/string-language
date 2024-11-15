@@ -1,9 +1,0 @@
-services:
-  php-fpm:
-    container_name: string-language-tests-runner
-    build:
-      context: .
-    volumes:
-      - ../..:/source
-    working_dir: /source
-    command: "composer run-script phpunit"

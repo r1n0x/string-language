@@ -26,6 +26,7 @@
     },
     "scripts": {
         "phpunit": "composer install && composer install --working-dir=tools && tools/vendor/bin/phpunit --testdox --coverage-html coverege_report",
+        "phpunit-github": "composer install && composer install --working-dir=tools && tools/vendor/bin/phpunit --coverage-clover ./coverage.xml",
         "phpstan": "composer install && composer install --working-dir=tools && tools/vendor/bin/phpstan analyse",
         "csfixer": "composer install && composer install --working-dir=tools && tools/vendor/bin/php-cs-fixer fix src"
     }
