@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
-use R1n0x\StringLanguage\Exception\Exception;
 use R1n0x\StringLanguage\Exception\LogicException;
 use R1n0x\StringLanguage\Exception\UnexpectedToken;
 use R1n0x\StringLanguage\Expression\Expression;
@@ -72,7 +71,7 @@ class ExpressionRunnerTest extends TestCase
         $runner->run(new ExpressionToken(
             name: 'test',
             tokens: [
-                new SeparatorToken()
+                new SeparatorToken(),
             ]
         ), []);
     }

@@ -33,7 +33,7 @@ class LiteralExpressionTest extends TestCase
         $this->assertEquals('VAR_NAME', $runner->run(new ExpressionToken(
             name: 'literal',
             tokens: [
-                new StringToken('VAR_NAME')
+                new StringToken('VAR_NAME'),
             ]
         ), []));
     }

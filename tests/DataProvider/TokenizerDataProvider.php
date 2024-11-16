@@ -14,23 +14,23 @@ class TokenizerDataProvider
     public static function tokenizes(): array
     {
         return [
-            "Empty string" => [
+            'Empty string' => [
                 '',
-                []
+                [],
             ],
-            "String containing string" => [
+            'String containing string' => [
                 'test',
                 [
-                    new StringToken('test')
-                ]
+                    new StringToken('test'),
+                ],
             ],
-            "String containing special characters" => [
+            'String containing special characters' => [
                 '!@#$%^&*()[]:;\'"}{\\|<>.~-_=+',
                 [
                     new StringToken('!@#$%^&*()[]:;\'"}{\\|<>.~-_=+'),
-                ]
+                ],
             ],
-            "String containing multiple strings" => [
+            'String containing multiple strings' => [
                 'test test2 test3',
                 [
                     new StringToken('test'),
@@ -38,54 +38,54 @@ class TokenizerDataProvider
                     new StringToken('test2'),
                     new SeparatorToken(),
                     new StringToken('test3'),
-                ]
+                ],
             ],
-            "String containing separator" => [
+            'String containing separator' => [
                 ' ',
                 [
-                    new SeparatorToken()
-                ]
+                    new SeparatorToken(),
+                ],
             ],
             // NO ONE USES MULTIPLE SPACES SERIOUSLY, IF YOU DO YOU DO SOMETHING WRONG
-            "String containing multiple separators" => [
+            'String containing multiple separators' => [
                 '  ',
                 [
                     new SeparatorToken(),
-                ]
+                ],
             ],
-            "String containing expression" => [
+            'String containing expression' => [
                 'function1(var1, var2)',
                 [
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
                             new StringToken('var1'),
-                            new StringToken('var2')
+                            new StringToken('var2'),
                         ]
-                    )
-                ]
+                    ),
+                ],
             ],
-            "String containing expression, which parameters are separated by multiple separators" => [
+            'String containing expression, which parameters are separated by multiple separators' => [
                 'function1(var1,                                     var2)',
                 [
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
                             new StringToken('var1'),
-                            new StringToken('var2')
+                            new StringToken('var2'),
                         ]
-                    )
-                ]
+                    ),
+                ],
             ],
             "String containing expression, which doesn't require any parameters" => [
                 'function1()',
                 [
                     new ExpressionToken(
                         name: 'function1'
-                    )
-                ]
+                    ),
+                ],
             ],
-            "String containing nested with parameters" => [
+            'String containing nested with parameters' => [
                 'function1(function2(var1, var2, var(var3)))',
                 [
                     new ExpressionToken(
@@ -101,34 +101,34 @@ class TokenizerDataProvider
                                         tokens: [
                                             new StringToken('var3'),
                                         ]
-                                    )
+                                    ),
                                 ]
-                            )
+                            ),
                         ]
-                    )
-                ]
+                    ),
+                ],
             ],
-            "String containing multiple expressions" => [
+            'String containing multiple expressions' => [
                 'function1(var1, var2) function2(var3)',
                 [
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
                             new StringToken('var1'),
-                            new StringToken('var2')
+                            new StringToken('var2'),
                         ]
                     ),
                     new SeparatorToken(),
                     new ExpressionToken(
                         name: 'function2',
                         tokens: [
-                            new StringToken('var3')
+                            new StringToken('var3'),
                         ]
-                    )
-                ]
+                    ),
+                ],
             ],
             // GIGA FEATURE
-            "String containing multiple expressions without separator in between" => [
+            'String containing multiple expressions without separator in between' => [
                 'function1()function2()',
                 [
                     new ExpressionToken(
@@ -137,21 +137,21 @@ class TokenizerDataProvider
                     new ExpressionToken(
                         name: 'function2'
                     ),
-                ]
+                ],
             ],
-            "String containing brackets" => [
+            'String containing brackets' => [
                 '()',
                 [
-                    new StringToken('()')
-                ]
+                    new StringToken('()'),
+                ],
             ],
-            "String containing string encapsulated in brackets" => [
+            'String containing string encapsulated in brackets' => [
                 '(test)',
                 [
-                    new StringToken('(test)')
-                ]
+                    new StringToken('(test)'),
+                ],
             ],
-            "String containing expression encapsulated in brackets" => [
+            'String containing expression encapsulated in brackets' => [
                 '(function1())',
                 [
                     new StringToken('('),
@@ -159,71 +159,71 @@ class TokenizerDataProvider
                         name: 'function1'
                     ),
                     new StringToken(')'),
-                ]
+                ],
             ],
-            "String containing expression encapsulated in multiple brackets" => [
+            'String containing expression encapsulated in multiple brackets' => [
                 '((function1()))',
                 [
                     new StringToken('(('),
                     new ExpressionToken(
                         name: 'function1'
                     ),
-                    new StringToken('))')
-                ]
+                    new StringToken('))'),
+                ],
             ],
-            "String containing expression encapsulated in quotations" => [
+            'String containing expression encapsulated in quotations' => [
                 '"function1(var1)"',
                 [
                     new StringToken('"'),
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
-                            new StringToken('var1')
+                            new StringToken('var1'),
                         ]
                     ),
                     new StringToken('"'),
-                ]
+                ],
             ],
-            "String containing expression encapsulated in quotations encapsulated in apostrophes" => [
+            'String containing expression encapsulated in quotations encapsulated in apostrophes' => [
                 '\'"function1(var1)"\'',
                 [
                     new StringToken('\'"'),
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
-                            new StringToken('var1')
+                            new StringToken('var1'),
                         ]
                     ),
                     new StringToken('"\''),
-                ]
+                ],
             ],
-            "String containing expression encapsulated in multiple quotations" => [
+            'String containing expression encapsulated in multiple quotations' => [
                 '""function1(var1)""',
                 [
                     new StringToken('""'),
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
-                            new StringToken('var1')
+                            new StringToken('var1'),
                         ]
                     ),
-                    new StringToken('""')
-                ]
+                    new StringToken('""'),
+                ],
             ],
-            "String containing expression encapsulated in apostrophes" => [
+            'String containing expression encapsulated in apostrophes' => [
                 "'function1(var1)'",
                 [
                     new StringToken("'"),
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
-                            new StringToken('var1')
+                            new StringToken('var1'),
                         ]
                     ),
                     new StringToken("'"),
-                ]
+                ],
             ],
-            "String containing expression encapsulated in apostrophes encapsulated in quotations" => [
+            'String containing expression encapsulated in apostrophes encapsulated in quotations' => [
                 '"\'function1(var1)\'"',
                 // ik it doesn't make any sense but hey, it works in the end :)
                 [
@@ -231,26 +231,26 @@ class TokenizerDataProvider
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
-                            new StringToken('var1')
+                            new StringToken('var1'),
                         ]
                     ),
-                    new StringToken('\'"')
-                ]
+                    new StringToken('\'"'),
+                ],
             ],
-            "String containing expression encapsulated in multiple apostrophes" => [
+            'String containing expression encapsulated in multiple apostrophes' => [
                 "''function1(var1)''",
                 [
                     new StringToken("''"),
                     new ExpressionToken(
                         name: 'function1',
                         tokens: [
-                            new StringToken('var1')
+                            new StringToken('var1'),
                         ]
                     ),
                     new StringToken("''"),
-                ]
+                ],
             ],
-            "String containing expression encapsulated in separators and brackets" => [
+            'String containing expression encapsulated in separators and brackets' => [
                 '( function1() )',
                 [
                     new StringToken('('),
@@ -260,7 +260,7 @@ class TokenizerDataProvider
                     ),
                     new SeparatorToken(),
                     new StringToken(')'),
-                ]
+                ],
             ],
             'String containing expression having one reference, which is empty' => [
                 'function( ,)',
@@ -269,7 +269,7 @@ class TokenizerDataProvider
                         name: 'function',
                         tokens: []
                     ),
-                ]
+                ],
             ],
             'String containing expression having one empty reference between variables' => [
                 'function(var1, ,var2)',
@@ -278,10 +278,10 @@ class TokenizerDataProvider
                         name: 'function',
                         tokens: [
                             new StringToken('var1'),
-                            new StringToken('var2')
+                            new StringToken('var2'),
                         ]
                     ),
-                ]
+                ],
             ],
             'String containing expression having multiple references, which are empty' => [
                 'function( , , , ,)',
@@ -290,7 +290,7 @@ class TokenizerDataProvider
                         name: 'function',
                         tokens: []
                     ),
-                ]
+                ],
             ],
             'String containing nested expression having one reference, which is empty' => [
                 'function1(function2( ,))',
@@ -303,8 +303,8 @@ class TokenizerDataProvider
                                 tokens: []
                             ),
                         ]
-                    )
-                ]
+                    ),
+                ],
             ],
             'String containing nested expression having multiple references of which one is empty' => [
                 'function1(function2(var1, ,))',
@@ -315,14 +315,14 @@ class TokenizerDataProvider
                             new ExpressionToken(
                                 name: 'function2',
                                 tokens: [
-                                    new StringToken('var1')
+                                    new StringToken('var1'),
                                 ]
                             ),
                         ]
-                    )
-                ]
+                    ),
+                ],
             ],
-            "String with everything" => [
+            'String with everything' => [
                 'test function1(var1, var2) test2   function2(var3) () (test) (function3(var4)) "test3" \'test4\' \'function4()\' "function5(function6(function7()))" test5 function8(function9(var5)) test6',
                 [
                     new StringToken('test'),
@@ -331,7 +331,7 @@ class TokenizerDataProvider
                         name: 'function1',
                         tokens: [
                             new StringToken('var1'),
-                            new StringToken('var2')
+                            new StringToken('var2'),
                         ]
                     ),
                     new SeparatorToken(),
@@ -340,7 +340,7 @@ class TokenizerDataProvider
                     new ExpressionToken(
                         name: 'function2',
                         tokens: [
-                            new StringToken('var3')
+                            new StringToken('var3'),
                         ]
                     ),
                     new SeparatorToken(),
@@ -352,7 +352,7 @@ class TokenizerDataProvider
                     new ExpressionToken(
                         name: 'function3',
                         tokens: [
-                            new StringToken('var4')
+                            new StringToken('var4'),
                         ]
                     ),
                     new StringToken(')'),
@@ -376,9 +376,9 @@ class TokenizerDataProvider
                                 tokens: [
                                     new ExpressionToken(
                                         name: 'function7',
-                                    )
+                                    ),
                                 ],
-                            )
+                            ),
                         ],
                     ),
                     new StringToken('"'),
@@ -391,15 +391,15 @@ class TokenizerDataProvider
                             new ExpressionToken(
                                 name: 'function9',
                                 tokens: [
-                                    new StringToken(raw: 'var5')
+                                    new StringToken(raw: 'var5'),
                                 ],
-                            )
+                            ),
                         ],
                     ),
                     new SeparatorToken(),
                     new StringToken('test6'),
-                ]
-            ]
+                ],
+            ],
         ];
     }
 
@@ -407,17 +407,17 @@ class TokenizerDataProvider
     {
         return [
             'String containing expression having one reference, which is empty' => [
-                'function( ,)'
+                'function( ,)',
             ],
             'String containing nested expression having one reference, which is empty' => [
-                'function1(function2( ,))'
+                'function1(function2( ,))',
             ],
             'String containing nested expression having multiple references of which one is empty' => [
-                'function1(function2(var1, ,))'
+                'function1(function2(var1, ,))',
             ],
             'String containing expression having multiple references, which are empty' => [
-                'function( , , , ,)'
-            ]
+                'function( , , , ,)',
+            ],
         ];
     }
 }

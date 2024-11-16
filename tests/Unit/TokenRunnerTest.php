@@ -72,7 +72,7 @@ class TokenRunnerTest extends TestCase
         $runner->run([
             new ExpressionToken(
                 name: 'test'
-            )
+            ),
         ], []);
     }
 
@@ -105,7 +105,8 @@ class TokenRunnerTest extends TestCase
     {
         $registry = new ExpressionRegistry();
         $registryModifier($registry);
-        $executor = new ExpressionRunner($registry);;
+        $executor = new ExpressionRunner($registry);
+
         return $executor;
     }
 }

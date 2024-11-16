@@ -21,25 +21,25 @@ class TokenRunnerDataProvider
                     new StringToken('123'),
                 ],
                 [],
-                (fn (ExpressionRegistry $registry) => null),
-                '123'
+                fn (ExpressionRegistry $registry) => null,
+                '123',
             ],
             'Tokens containing separator' => [
                 [
-                    new SeparatorToken()
+                    new SeparatorToken(),
                 ],
                 [],
-                (fn (ExpressionRegistry $registry) => null),
-                ' '
+                fn (ExpressionRegistry $registry) => null,
+                ' ',
             ],
             'Tokens containing simple expression' => [
                 [
                     new ExpressionToken(
                         name: 'function_name'
-                    )
+                    ),
                 ],
                 [],
-                (function (ExpressionRegistry $registry) {
+                function (ExpressionRegistry $registry) {
                     $registry->register(new class extends Expression {
                         public function getExpressionName(): string
                         {
@@ -56,8 +56,8 @@ class TokenRunnerDataProvider
                             return 'test_return';
                         }
                     });
-                }),
-                'test_return'
+                },
+                'test_return',
             ],
             'Tokens containing nested expression' => [
                 [
@@ -65,12 +65,12 @@ class TokenRunnerDataProvider
                         name: 'function1',
                         tokens: [
                             new ExpressionToken(name: 'function2'),
-                            new ExpressionToken(name: 'function3')
+                            new ExpressionToken(name: 'function3'),
                         ]
-                    )
+                    ),
                 ],
                 [],
-                (function (ExpressionRegistry $registry) {
+                function (ExpressionRegistry $registry) {
                     $registry->register(new class extends Expression {
                         public function getExpressionName(): string
                         {
@@ -121,8 +121,8 @@ class TokenRunnerDataProvider
                             return 'nested_function_return2';
                         }
                     });
-                }),
-                'nested_function_return1 nested_function_return2'
+                },
+                'nested_function_return1 nested_function_return2',
             ],
             'Tokens containing advanced method' => [
                 [
@@ -132,13 +132,13 @@ class TokenRunnerDataProvider
                             new StringToken('name'),
                             new StringToken('id'),
                         ]
-                    )
+                    ),
                 ],
                 [
                     'name' => 'RANDOM_VALUE',
-                    'id' => 123
+                    'id' => 123,
                 ],
-                (function (ExpressionRegistry $registry) {
+                function (ExpressionRegistry $registry) {
                     $registry->register(new class extends Expression {
                         public function getExpressionName(): string
                         {
@@ -155,8 +155,8 @@ class TokenRunnerDataProvider
                             return $name . '_INSERT_' . $id;
                         }
                     });
-                }),
-                'RANDOM_VALUE_INSERT_123'
+                },
+                'RANDOM_VALUE_INSERT_123',
             ],
             'Tokens containing full expression' => [
                 [
@@ -170,13 +170,13 @@ class TokenRunnerDataProvider
                     new SeparatorToken(),
                     new StringToken('a'),
                     new StringToken('b'),
-                    new StringToken('c')
+                    new StringToken('c'),
                 ],
                 [
                     'name' => 'RANDOM_VALUE',
-                    'id' => 123
+                    'id' => 123,
                 ],
-                (function (ExpressionRegistry $registry) {
+                function (ExpressionRegistry $registry) {
                     $registry->register(new class extends Expression {
                         public function getExpressionName(): string
                         {
@@ -193,9 +193,9 @@ class TokenRunnerDataProvider
                             return $name . '_INSERT_' . $id;
                         }
                     });
-                }),
-                'RANDOM_VALUE_INSERT_123 abc'
-            ]
+                },
+                'RANDOM_VALUE_INSERT_123 abc',
+            ],
         ];
     }
 }

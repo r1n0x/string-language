@@ -38,7 +38,7 @@ class ExpressionRunnerDataProvider
                     name: 'test'
                 ),
                 [],
-                'return'
+                'return',
             ],
             'Expression with arguments' => [
                 function (ExpressionRegistry $registry) {
@@ -62,13 +62,13 @@ class ExpressionRunnerDataProvider
                 new ExpressionToken(
                     name: 'test',
                     tokens: [
-                        new StringToken('var1')
+                        new StringToken('var1'),
                     ]
                 ),
                 [
-                    'var1' => '1'
+                    'var1' => '1',
                 ],
-                'return1'
+                'return1',
             ],
             'Expression with arguments but using them literally' => [
                 function (ExpressionRegistry $registry) {
@@ -97,12 +97,12 @@ class ExpressionRunnerDataProvider
                 new ExpressionToken(
                     name: 'test',
                     tokens: [
-                        new StringToken('var1')
+                        new StringToken('var1'),
                     ]
                 ),
                 [],
-                'return_var1'
-            ]
+                'return_var1',
+            ],
         ];
     }
 }

@@ -9,7 +9,6 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use R1n0x\StringLanguage\Exception\ExpressionNestLimitReachedException;
-use R1n0x\StringLanguage\Exception\InvalidExpressionArgumentException;
 use R1n0x\StringLanguage\Internal\Enum\LexerToken;
 use R1n0x\StringLanguage\Internal\ExpressionRegexGenerator;
 use R1n0x\StringLanguage\Internal\StringLexer;
@@ -34,9 +33,7 @@ use R1n0x\StringLanguage\Tokenizer;
 class TokenizerTest extends TestCase
 {
     /**
-     * @param string $value
      * @param array<int, Token> $expected
-     * @return void
      */
     #[Test]
     #[DataProviderExternal(TokenizerDataProvider::class, 'tokenizes')]
@@ -53,7 +50,7 @@ class TokenizerTest extends TestCase
         $this->expectException(ExpressionNestLimitReachedException::class);
         $tokenizer = $this->getTokenizer();
         $string = '';
-        for ($i = 0; $i <= (ExpressionRegexGenerator::UNSAFE_EXPRESSION_NEST_AMOUNT); $i++) {
+        for ($i = 0; $i <= ExpressionRegexGenerator::UNSAFE_EXPRESSION_NEST_AMOUNT; ++$i) {
             $string = "function$i($string)";
         }
         $tokenizer->tokenize($string);
