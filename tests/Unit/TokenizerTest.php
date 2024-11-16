@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use R1n0x\StringLanguage\Exception\ExpressionNestLimitReachedException;
+use R1n0x\StringLanguage\Exception\InvalidExpressionArgumentException;
 use R1n0x\StringLanguage\Internal\Enum\LexerToken;
 use R1n0x\StringLanguage\Internal\ExpressionRegexGenerator;
 use R1n0x\StringLanguage\Internal\StringLexer;
@@ -57,12 +58,12 @@ class TokenizerTest extends TestCase
     }
 
     #[Test]
-    #[DataProviderExternal(TokenizerDataProvider::class, 'throws_an_exception_when_empty_reference_passed_to_expression')]
-    public function throws_an_exception_when_empty_reference_passed_to_expression(string $string): void
+    #[TestDox('Throws an exception on invalid expression argument name')]
+    public function throws_an_exception_on_invalid_expression_argument_name(): void
     {
-        $this->markTestSkipped('Make new tests for throwing exception');
+        $this->expectException(InvalidExpressionArgumentException::class);
         $tokenizer = $this->getTokenizer();
-        $tokenizer->tokenize($string);
+        $tokenizer->tokenize('function(var-1)');
     }
 
     protected function getTokenizer(): Tokenizer

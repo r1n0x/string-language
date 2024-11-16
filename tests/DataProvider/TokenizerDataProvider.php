@@ -53,7 +53,7 @@ class TokenizerDataProvider
                     new SeparatorToken(),
                 ],
             ],
-            'String containing expression' => [
+            'String containing non-nested expression' => [
                 'function1(var1, var2)',
                 [
                     new ExpressionToken(
@@ -65,7 +65,7 @@ class TokenizerDataProvider
                     ),
                 ],
             ],
-            'String containing expression, which parameters are separated by multiple separators' => [
+            'String containing non-nested expression, which parameters are separated by multiple separators' => [
                 'function1(var1,                                     var2)',
                 [
                     new ExpressionToken(
@@ -77,7 +77,7 @@ class TokenizerDataProvider
                     ),
                 ],
             ],
-            "String containing expression, which doesn't require any parameters" => [
+            "String containing non-nested expression, which doesn't require any parameters" => [
                 'function1()',
                 [
                     new ExpressionToken(
@@ -108,7 +108,7 @@ class TokenizerDataProvider
                     ),
                 ],
             ],
-            'String containing multiple expressions' => [
+            'String containing multiple non-nested expressions' => [
                 'function1(var1, var2) function2(var3)',
                 [
                     new ExpressionToken(
@@ -128,7 +128,7 @@ class TokenizerDataProvider
                 ],
             ],
             // GIGA FEATURE
-            'String containing multiple expressions without separator in between' => [
+            'String containing multiple unseparated non-nested expressions' => [
                 'function1()function2()',
                 [
                     new ExpressionToken(
@@ -151,7 +151,7 @@ class TokenizerDataProvider
                     new StringToken('(test)'),
                 ],
             ],
-            'String containing expression encapsulated in brackets' => [
+            'String containing non-nested expression encapsulated in brackets' => [
                 '(function1())',
                 [
                     new StringToken('('),
@@ -161,7 +161,7 @@ class TokenizerDataProvider
                     new StringToken(')'),
                 ],
             ],
-            'String containing expression encapsulated in multiple brackets' => [
+            'String containing non-nested expression encapsulated in multiple brackets' => [
                 '((function1()))',
                 [
                     new StringToken('(('),
@@ -171,7 +171,7 @@ class TokenizerDataProvider
                     new StringToken('))'),
                 ],
             ],
-            'String containing expression encapsulated in quotations' => [
+            'String containing non-nested expression encapsulated in quotations' => [
                 '"function1(var1)"',
                 [
                     new StringToken('"'),
@@ -184,7 +184,7 @@ class TokenizerDataProvider
                     new StringToken('"'),
                 ],
             ],
-            'String containing expression encapsulated in quotations encapsulated in apostrophes' => [
+            'String containing non-nested expression encapsulated in quotations encapsulated in apostrophes' => [
                 '\'"function1(var1)"\'',
                 [
                     new StringToken('\'"'),
@@ -197,7 +197,7 @@ class TokenizerDataProvider
                     new StringToken('"\''),
                 ],
             ],
-            'String containing expression encapsulated in multiple quotations' => [
+            'String containing non-nested expression encapsulated in multiple quotations' => [
                 '""function1(var1)""',
                 [
                     new StringToken('""'),
@@ -210,7 +210,7 @@ class TokenizerDataProvider
                     new StringToken('""'),
                 ],
             ],
-            'String containing expression encapsulated in apostrophes' => [
+            'String containing non-nested expression encapsulated in apostrophes' => [
                 "'function1(var1)'",
                 [
                     new StringToken("'"),
@@ -223,7 +223,7 @@ class TokenizerDataProvider
                     new StringToken("'"),
                 ],
             ],
-            'String containing expression encapsulated in apostrophes encapsulated in quotations' => [
+            'String containing non-nested expression encapsulated in apostrophes encapsulated in quotations' => [
                 '"\'function1(var1)\'"',
                 // ik it doesn't make any sense but hey, it works in the end :)
                 [
@@ -237,7 +237,7 @@ class TokenizerDataProvider
                     new StringToken('\'"'),
                 ],
             ],
-            'String containing expression encapsulated in multiple apostrophes' => [
+            'String containing non-nested expression encapsulated in multiple apostrophes' => [
                 "''function1(var1)''",
                 [
                     new StringToken("''"),
@@ -250,7 +250,7 @@ class TokenizerDataProvider
                     new StringToken("''"),
                 ],
             ],
-            'String containing expression encapsulated in separators and brackets' => [
+            'String containing non-nested expression encapsulated in separators and brackets' => [
                 '( function1() )',
                 [
                     new StringToken('('),
@@ -262,7 +262,7 @@ class TokenizerDataProvider
                     new StringToken(')'),
                 ],
             ],
-            'String containing expression having one reference, which is empty' => [
+            'String containing non-nested expression having one argument, which is empty' => [
                 'function( ,)',
                 [
                     new ExpressionToken(
@@ -271,7 +271,7 @@ class TokenizerDataProvider
                     ),
                 ],
             ],
-            'String containing expression having one empty reference between variables' => [
+            'String containing non-nested expression having one empty argument between variables' => [
                 'function(var1, ,var2)',
                 [
                     new ExpressionToken(
@@ -283,7 +283,7 @@ class TokenizerDataProvider
                     ),
                 ],
             ],
-            'String containing expression having multiple references, which are empty' => [
+            'String containing non-nested expression having multiple arguments, which are empty' => [
                 'function( , , , ,)',
                 [
                     new ExpressionToken(
@@ -292,7 +292,7 @@ class TokenizerDataProvider
                     ),
                 ],
             ],
-            'String containing nested expression having one reference, which is empty' => [
+            'String containing nested expression having one argument, which is empty' => [
                 'function1(function2( ,))',
                 [
                     new ExpressionToken(
@@ -306,7 +306,7 @@ class TokenizerDataProvider
                     ),
                 ],
             ],
-            'String containing nested expression having multiple references of which one is empty' => [
+            'String containing nested expression having multiple arguments of which one is empty' => [
                 'function1(function2(var1, ,))',
                 [
                     new ExpressionToken(
@@ -323,7 +323,7 @@ class TokenizerDataProvider
                 ],
             ],
             'String with everything' => [
-                'test function1(var1, var2) test2   function2(var3) () (test) (function3(var4)) "test3" \'test4\' \'function4()\' "function5(function6(function7()))" test5 function8(function9(var5)) test6',
+                'test function1(var1, var2) test2   function2(var3) () (test) (function3(var4)) "test3" \'test4\' \'function4()\' "function5(function6(function7()))" test5 function8(function9(var5)) test6 function10(variable with spaces) function11(variable space, var6)',
                 [
                     new StringToken('test'),
                     new SeparatorToken(),
@@ -398,25 +398,22 @@ class TokenizerDataProvider
                     ),
                     new SeparatorToken(),
                     new StringToken('test6'),
+                    new SeparatorToken(),
+                    new ExpressionToken(
+                        name: 'function10',
+                        tokens: [
+                            new StringToken('variable with spaces'),
+                        ],
+                    ),
+                    new SeparatorToken(),
+                    new ExpressionToken(
+                        name: 'function11',
+                        tokens: [
+                            new StringToken('variable space'),
+                            new StringToken('var6'),
+                        ],
+                    ),
                 ],
-            ],
-        ];
-    }
-
-    public static function throws_an_exception_when_empty_reference_passed_to_expression(): array
-    {
-        return [
-            'String containing expression having one reference, which is empty' => [
-                'function( ,)',
-            ],
-            'String containing nested expression having one reference, which is empty' => [
-                'function1(function2( ,))',
-            ],
-            'String containing nested expression having multiple references of which one is empty' => [
-                'function1(function2(var1, ,))',
-            ],
-            'String containing expression having multiple references, which are empty' => [
-                'function( , , , ,)',
             ],
         ];
     }
