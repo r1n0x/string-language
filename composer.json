@@ -26,8 +26,10 @@
     },
     "scripts": {
         "phpunit": "composer install && composer install --working-dir=tools && tools/vendor/bin/phpunit --testdox --coverage-html coverege_report",
-        "phpunit-github": "composer install && composer install --working-dir=tools && tools/vendor/bin/phpunit --coverage-clover ./coverage.xml",
+        "phpunit-github": "composer install --quiet --no-progress && composer install --quiet --no-progress --working-dir=tools && tools/vendor/bin/phpunit --coverage-clover ./coverage.xml",
         "phpstan": "composer install && composer install --working-dir=tools && tools/vendor/bin/phpstan analyse",
-        "csfixer": "composer install && composer install --working-dir=tools && tools/vendor/bin/php-cs-fixer fix src"
+        "phpstan-github": "composer install --quiet --no-progress && composer install --quiet --no-progress --working-dir=tools && tools/vendor/bin/phpstan analyse --no-progress",
+        "csfixer": "composer install && composer install --working-dir=tools && tools/vendor/bin/php-cs-fixer fix",
+        "csfixer-github": "composer install --quiet --no-progress && composer install --quiet --no-progress --working-dir=tools && tools/vendor/bin/php-cs-fixer check --show-progress=none"
     }
 }

@@ -2,4 +2,5 @@
 .phpunit.cache
 vendor
 coverege_report
+coverage.xml
 documentation
