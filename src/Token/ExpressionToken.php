@@ -14,7 +14,7 @@ class ExpressionToken extends Token
      */
     public function __construct(
         private readonly string $name,
-        #[Type('array<int, array<int, ' . Token::class . '>>')]
+        #[Type('array<int, ' . Token::class . '>')]
         private readonly array $tokens = [],
     ) {
     }
