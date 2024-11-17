@@ -6,7 +6,7 @@ This library provides a simple string language which in the end returns only a s
 
 Documentation
 --------------------------
-For documentation visit [documentation page](https://r1n0x.github.io/string-languag).
+For documentation visit [documentation page](https://r1n0x.github.io/string-language).
 
 Running tests (PHPUnit)
 --------------------------
