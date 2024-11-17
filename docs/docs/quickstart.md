@@ -4,18 +4,20 @@ sidebar_position: 3
 
 # Quickstart
 
-Code below shows the principles of this library works, may be a little too much for a quickstart, but it shows you 
+Code below shows the principles how of this library works - may be a little too much for a quickstart, but it shows you 
 most of the functionalities it provides.
 
-Example shows how to create your own expression and introduces concepts such `Tokenizer` which parses your string
-into array of tokens which will be later on ran by a `TokenRunner` - it uses `ExpressionRunner` internally for running
-all expressions concatenated within a string.
+Example shows how to create your own expression which basically is a method that you could use within a string, it also 
+introduces concepts such `Tokenizer` which parses your string into array of tokens which will be later on ran 
+by a `TokenRunner` - it uses `ExpressionRunner` internally for running all expressions interpolated within a string.
 
 `ExpressionRegistry` is the concept you should remember, it stores all the available expressions - also your own.
 For the sake of this example we will also use library provided expression called `LiteralExpression` which allows you to pass 
 a static string to a parent expression.
 
-**Tokenizer doesn't support conditionals - only expressions.**
+:::warning
+Library doesn't support conditionals within a tokenized string and there is to future plans for that.
+:::
 
 ```php
 use R1n0x\StringLanguage\Expression\Expression;
