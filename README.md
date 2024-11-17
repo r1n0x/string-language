@@ -1,17 +1,12 @@
 [![codecov](https://codecov.io/github/r1n0x/string-language/graph/badge.svg?token=VAFFHQTTUW)](https://codecov.io/github/r1n0x/string-language)
 
-Status
---------------------------
-Project is currently being worked on, everything is looking good tho.
-
 About
 --------------------------
-StringLanguage library targets people who want to are in need of simple string
-concatenation language. The main focus while developing was to be extendable easily.
+This library provides a simple string language which in the end returns only a string, thus why "String Language" name - it exists purely because concatenating strings with other similar libraries seemed overkill and not easy to read.
 
 Documentation
 --------------------------
-For documentation visit [documentation page](/TODO).
+For documentation visit [documentation page](https://r1n0x.github.io/string-languag).
 
 Running tests (PHPUnit)
 --------------------------

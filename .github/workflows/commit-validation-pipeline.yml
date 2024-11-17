@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Run PHPStan
         run: docker run --rm --quiet --volume .:/source --workdir /source --tty r1n0x/string-language-container:1.0.1 composer run-script phpstan-github
@@ -27,6 +29,8 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Run CS-Fixer
         run: docker run --rm --quiet --volume .:/source --workdir /source --tty r1n0x/string-language-container:1.0.1 composer run-script csfixer-github
@@ -40,6 +44,8 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Run PHPUnit
         run: docker run --rm --quiet --volume .:/source --workdir /source --tty r1n0x/string-language-container:1.0.1 composer run-script phpunit-github

@@ -1,8 +1,9 @@
 {
     "name": "r1n0x/string-language",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "R1n0x\\StringLanguage\\": "src/"
