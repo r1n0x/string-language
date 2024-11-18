@@ -9,21 +9,20 @@ most of the functionalities it provides.
 
 Example shows how to create your own expression which basically is a method that you could use within a string, it also 
 introduces concepts such `Tokenizer` which parses your string into array of tokens which will be later on ran 
-by a `TokenRunner` - it uses `ExpressionRunner` internally for running all expressions interpolated within a string.
+by a `TokenRunner`.
 
 `ExpressionRegistry` is the concept you should remember, it stores all the available expressions - also your own.
 For the sake of this example we will also use library provided expression called `LiteralExpression` which allows you to pass 
 a static string to a parent expression.
 
 :::warning
-Library doesn't support conditionals within a tokenized string and there is to future plans for that.
+There is no support for conditionals within a tokenized string and there is to future plans for that.
 :::
 
 ```php
 use R1n0x\StringLanguage\Expression\Expression;
 use R1n0x\StringLanguage\Expression\LiteralExpression;
 use R1n0x\StringLanguage\ExpressionRegistry;
-use R1n0x\StringLanguage\ExpressionRunner;
 use R1n0x\StringLanguage\Tokenizer;
 use R1n0x\StringLanguage\TokenRunner;
 
@@ -53,7 +52,7 @@ $registry = new ExpressionRegistry();
 $registry->register(new LiteralExpression());
 $registry->register(new CustomExpression());
 
-$runner = new TokenRunner(new ExpressionRunner($registry));
+$runner = new TokenRunner($registry);
 $output = $runner->run($tokens, [
     'var1' => 'of what'
 ]);
