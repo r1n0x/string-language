@@ -5,7 +5,7 @@ namespace R1n0x\StringLanguage;
 use R1n0x\StringLanguage\Exception\ExpressionAlreadyRegisteredException;
 use R1n0x\StringLanguage\Exception\UnknownExpressionException;
 use R1n0x\StringLanguage\Expression\Expression;
-use R1n0x\StringLanguage\Internal\ExpressionValidator;
+use R1n0x\StringLanguage\Internal\Validator\ExpressionValidator;
 
 /**
  * @author r1n0x <r1n0x-dev@proton.me>

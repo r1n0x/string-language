@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use R1n0x\StringLanguage\Exception\NonpublicMethodException;
 use R1n0x\StringLanguage\Exception\UndefinedMethodException;
 use R1n0x\StringLanguage\Expression\Expression;
-use R1n0x\StringLanguage\Internal\ExpressionValidator;
+use R1n0x\StringLanguage\Internal\Validator\ExpressionValidator;
 
 /**
  * @author r1n0x <r1n0x-dev@proton.me>

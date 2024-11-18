@@ -1,6 +1,6 @@
 <?php
 
-namespace R1n0x\StringLanguage\Internal;
+namespace R1n0x\StringLanguage\Internal\Validator;
 
 use R1n0x\StringLanguage\Exception\NonpublicMethodException;
 use R1n0x\StringLanguage\Exception\UndefinedMethodException;

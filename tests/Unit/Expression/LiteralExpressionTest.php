@@ -9,7 +9,8 @@ use PHPUnit\Framework\TestCase;
 use R1n0x\StringLanguage\Expression\LiteralExpression;
 use R1n0x\StringLanguage\ExpressionRegistry;
 use R1n0x\StringLanguage\ExpressionRunner;
-use R1n0x\StringLanguage\Internal\ExpressionValidator;
+use R1n0x\StringLanguage\Internal\Validator\ExpressionCallValidator;
+use R1n0x\StringLanguage\Internal\Validator\ExpressionValidator;
 use R1n0x\StringLanguage\Token\ExpressionToken;
 use R1n0x\StringLanguage\Token\StringToken;
 
@@ -22,6 +23,7 @@ use R1n0x\StringLanguage\Token\StringToken;
 #[UsesClass(ExpressionValidator::class)]
 #[UsesClass(ExpressionToken::class)]
 #[UsesClass(StringToken::class)]
+#[UsesClass(ExpressionCallValidator::class)]
 class LiteralExpressionTest extends TestCase
 {
     #[Test]

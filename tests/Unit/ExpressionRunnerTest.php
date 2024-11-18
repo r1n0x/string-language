@@ -13,7 +13,8 @@ use R1n0x\StringLanguage\Exception\UnexpectedToken;
 use R1n0x\StringLanguage\Expression\Expression;
 use R1n0x\StringLanguage\ExpressionRegistry;
 use R1n0x\StringLanguage\ExpressionRunner;
-use R1n0x\StringLanguage\Internal\ExpressionValidator;
+use R1n0x\StringLanguage\Internal\Validator\ExpressionCallValidator;
+use R1n0x\StringLanguage\Internal\Validator\ExpressionValidator;
 use R1n0x\StringLanguage\Tests\DataProvider\ExpressionRunnerDataProvider;
 use R1n0x\StringLanguage\Token\ExpressionToken;
 use R1n0x\StringLanguage\Token\SeparatorToken;
@@ -29,6 +30,7 @@ use R1n0x\StringLanguage\Token\StringToken;
 #[UsesClass(ExpressionToken::class)]
 #[UsesClass(Expression::class)]
 #[UsesClass(StringToken::class)]
+#[UsesClass(ExpressionCallValidator::class)]
 class ExpressionRunnerTest extends TestCase
 {
     /**
