@@ -36,6 +36,7 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [],
             ],
             'Call which requires a single argument' => [
                 new ExpressionToken(
@@ -60,6 +61,9 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [
+                    'var1' => '',
+                ],
             ],
             'Call which requires a single, which is not required' => [
                 new ExpressionToken(
@@ -82,6 +86,7 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [],
             ],
             'Call which requires a single, which is a literal' => [
                 new ExpressionToken(
@@ -111,6 +116,9 @@ class ExpressionCallValidatorDataProvider
                         return true;
                     }
                 },
+                [
+                    'var1' => '',
+                ],
             ],
             'Call which requires multiple arguments' => [
                 new ExpressionToken(
@@ -144,6 +152,13 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [
+                    'var1' => '',
+                    'var2' => '',
+                    'var3' => '',
+                    'var4' => '',
+                    'var5' => '',
+                ],
             ],
             'Call which requires multiple arguments, and last ones are optional' => [
                 new ExpressionToken(
@@ -177,6 +192,13 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [
+                    'var1' => '',
+                    'var2' => '',
+                    'var3' => '',
+                    'var4' => '',
+                    'var5' => '',
+                ],
             ],
             'Call has optional parameters in the middle of required ones but all all provided' => [
                 new ExpressionToken(
@@ -203,6 +225,11 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [
+                    'var1' => '',
+                    'var2' => '',
+                    'var3' => '',
+                ],
             ],
         ];
     }
@@ -234,6 +261,10 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [
+                    'var1' => '',
+                    'var2' => '',
+                ],
             ],
             'Call requires more arguments than provided amount' => [
                 new ExpressionToken(
@@ -256,6 +287,32 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [],
+            ],
+            'Call requires arguments but their values was not provided' => [
+                new ExpressionToken(
+                    name: 'test',
+                    tokens: [
+                        new StringToken('var1'),
+                    ]
+                ),
+                new class extends Expression {
+                    public function getExpressionName(): string
+                    {
+                        return 'test';
+                    }
+
+                    public function getMethodName(): string
+                    {
+                        return 'example';
+                    }
+
+                    public function example(string $var1): void
+                    {
+                        throw new Exception();
+                    }
+                },
+                [],
             ],
             'Call has optional parameters in the middle of required ones and not all of them were provided' => [
                 new ExpressionToken(
@@ -281,6 +338,10 @@ class ExpressionCallValidatorDataProvider
                         throw new Exception();
                     }
                 },
+                [
+                    'var1' => '',
+                    'var2' => '',
+                ],
             ],
         ];
     }

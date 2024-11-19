@@ -26,10 +26,11 @@ class TokenValidator
 
     /**
      * @param array<int, Token> $tokens
+     * @param array<string, mixed> $variables
      *
      * @return array<int, ValidationError>
      */
-    public function validate(array $tokens): array
+    public function validate(array $tokens, array $variables): array
     {
         $errors = [];
         foreach ($tokens as $token) {
@@ -40,14 +41,14 @@ class TokenValidator
             try {
                 $expression = $this->registry->get($expressionName);
                 $this->expressionValidator->validate($expression);
-                $this->expressionCallValidator->validate($token, $expression);
+                $this->expressionCallValidator->validate($token, $expression, $variables);
             } catch (UnknownExpressionException|ValidatorException $e) {
                 $errors[] = new ValidationError(
                     description: $e->getMessage(),
                     token: $token
                 );
             }
-            $errors = [...$errors, ...$this->validate($token->getTokens())];
+            $errors = [...$errors, ...$this->validate($token->getTokens(), $variables)];
         }
 
         return $errors;

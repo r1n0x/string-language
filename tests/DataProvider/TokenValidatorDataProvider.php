@@ -68,6 +68,7 @@ class TokenValidatorDataProvider
                         ]
                     ),
                 ],
+                [],
                 0,
             ],
             'When tokens with unknown nested expression provided' => [
@@ -105,6 +106,7 @@ class TokenValidatorDataProvider
                         ]
                     ),
                 ],
+                [],
                 1,
             ],
             'When tokens with unknown nested and non-expression provided' => [
@@ -124,6 +126,7 @@ class TokenValidatorDataProvider
                         ]
                     ),
                 ],
+                [],
                 2,
             ],
             'When tokens with invalid arguments in non-nested expression provided' => [
@@ -156,6 +159,7 @@ class TokenValidatorDataProvider
                         tokens: []
                     ),
                 ],
+                [],
                 1,
             ],
             'When tokens with invalid arguments in nested expression provided' => [
@@ -209,6 +213,7 @@ class TokenValidatorDataProvider
                         ]
                     ),
                 ],
+                [],
                 1,
             ],
         ];

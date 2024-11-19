@@ -64,7 +64,7 @@ class ExpressionRunner
         }
 
         if ($validate) {
-            $this->expressionCallValidator->validate($expressionToken, $expression);
+            $this->expressionCallValidator->validate($expressionToken, $expression, $variables);
         }
 
         return $arguments;

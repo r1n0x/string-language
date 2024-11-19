@@ -10,12 +10,7 @@ and you're not sure if all expressions used within them may still be available a
 
 If you're in need of this kind of validation, there is a validator for that.
 
-Validating variables is currently not supported.
-
 :::info
-Validator doesn't do any deep validation like expression argument type checking - it only checks if they're available
-and if you've provided all the required arguments.
-
 **Type checking** is only done at runtime (when you run the tokens) and will throw a standard PHP error.
 :::
 
@@ -30,9 +25,11 @@ $tokens = $tokenizer->tokenize('This is custom(literal(an example), var1) you ca
 $registry = new ExpressionRegistry();
 $validator = new TokenValidator($registry);
 
-$errors = $validator->validate($tokens);
+$errors = $validator->validate($tokens, [
+    'var1' => null // we can provide placeholder variables,
+]);                // because they won't be type checked (tokens won't be run)
 
-print_r($errors); // prints 2 errors cause expressions literal and custom are not registered
+print_r($errors); // prints 2 errors cause expressions 'literal' and 'custom' are not registered
 ```
 
 `TokenValidator` method `validate` returns an array of `ValidationError` instances, from those you can get a whole token,

@@ -20,24 +20,32 @@ use R1n0x\StringLanguage\Token\StringToken;
 #[CoversClass(ExpressionCallValidator::class)]
 #[UsesClass(ExpressionToken::class)]
 #[UsesClass(StringToken::class)]
+#[UsesClass(ExpressionToken::class)]
+#[UsesClass(Expression::class)]
 class ExpressionCallValidatorTest extends TestCase
 {
+    /**
+     * @param array<string, mixed> $variables
+     */
     #[Test]
     #[DataProviderExternal(ExpressionCallValidatorDataProvider::class, 'validates')]
-    public function validates(ExpressionToken $token, Expression $expression): void
+    public function validates(ExpressionToken $token, Expression $expression, array $variables): void
     {
         $this->expectNotToPerformAssertions();
         $validator = $this->getValidator();
-        $validator->validate($token, $expression);
+        $validator->validate($token, $expression, $variables);
     }
 
+    /**
+     * @param array<string, mixed> $variables
+     */
     #[Test]
     #[DataProviderExternal(ExpressionCallValidatorDataProvider::class, 'throws_an_exception')]
-    public function throws_an_exception(ExpressionToken $token, Expression $expression): void
+    public function throws_an_exception(ExpressionToken $token, Expression $expression, array $variables): void
     {
         $this->expectException(InvalidExpressionCallException::class);
         $validator = $this->getValidator();
-        $validator->validate($token, $expression);
+        $validator->validate($token, $expression, $variables);
     }
 
     protected function getValidator(): ExpressionCallValidator

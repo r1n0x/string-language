@@ -39,7 +39,7 @@ class TokenRunner
      */
     public function run(array $tokens, array $variables): string
     {
-        $this->validate($tokens);
+        $this->validate($tokens, $variables);
 
         $ret = '';
         foreach ($tokens as $token) {
@@ -63,12 +63,13 @@ class TokenRunner
 
     /**
      * @param array<int, Token> $tokens
+     * @param array<string, mixed> $variables
      *
      * @throws TokenRunnerValidationException
      */
-    private function validate(array $tokens): void
+    private function validate(array $tokens, array $variables): void
     {
-        $errors = $this->tokenValidator->validate($tokens);
+        $errors = $this->tokenValidator->validate($tokens, $variables);
         if (count($errors) > 0) {
             $exception = new TokenRunnerValidationException();
             $exception->setErrors($errors);
