@@ -94,7 +94,7 @@ class Tokenizer
         $expressionName = $this->getExpressionName();
         // allows spaces so you can pass arguments with spaces to literals,
         // downside is allowing variables with spaces obviously, but I guess that's a feature
-        preg_match('/^[a-zA-Z0-9_ ]*$/', $argument, $matches);
+        preg_match('/^[a-zA-Z0-9_\/:\\\\. ]*$/', $argument, $matches);
         if ('' === $argument || !isset($matches[0]) || $matches[0] !== $argument) {
             throw new InvalidExpressionArgumentException("Expression '$expressionName' argument '$argument' is invalid.");
         }

@@ -65,6 +65,28 @@ class TokenizerDataProvider
                     ),
                 ],
             ],
+            'String containing expression which takes linux path' => [
+                'function1(/etc/resolv.conf)',
+                [
+                    new ExpressionToken(
+                        name: 'function1',
+                        tokens: [
+                            new StringToken('/etc/resolv.conf'),
+                        ]
+                    ),
+                ],
+            ],
+            'String containing expression which takes windows path' => [
+                'function1(C:\\\\system32.exe)',
+                [
+                    new ExpressionToken(
+                        name: 'function1',
+                        tokens: [
+                            new StringToken('C:\\\\system32.exe'),
+                        ]
+                    ),
+                ],
+            ],
             'String containing non-nested expression, which parameters are separated by multiple separators' => [
                 'function1(var1,                                     var2)',
                 [
